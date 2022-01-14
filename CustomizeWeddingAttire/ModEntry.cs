@@ -16,6 +16,12 @@ namespace CustomizeWeddingAttire
         // Add a translator
         private ITranslationHelper I18n;
 
+        // Config option strings defined here as constants for use elsewhere
+        public static const tuxOption = "weddingAttire.tuxOption";
+        public static const dressOption = "weddingAttire.dressOption";
+        public static const noneOption = "weddingAttire.noneOption";
+        public static const defaultOption = "weddingAttire.defaultOption";
+
         // TODO investigate Fashion Sense compatibility
         // TODO make sure translations work in GMCM
 
