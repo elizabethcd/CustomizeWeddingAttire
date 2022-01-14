@@ -16,6 +16,9 @@ namespace CustomizeWeddingAttire
         // Add a translator
         private ITranslationHelper I18n;
 
+        // TODO investigate Fashion Sense compatibility
+        // TODO make sure translations work in GMCM
+
         /*********
         ** Public methods
         *********/
@@ -40,8 +43,6 @@ namespace CustomizeWeddingAttire
             helper.Events.GameLoop.GameLaunched += SetUpConfig;
         }
 
-        // TODO make sure translations work here
-
         private void SetUpConfig(object sender, StardewModdingAPI.Events.GameLaunchedEventArgs e)
         {
             var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
@@ -51,7 +52,7 @@ namespace CustomizeWeddingAttire
             configMenu.Register(
                 mod: ModManifest,
                 reset: () => Config = new ModConfig(),
-                save: () => Helper.WriteConfig(Config)
+                save: () => Helper.WriteConfig(Config) // add "send out message with prefs here"
                 );
             configMenu.AddTextOption(
                 mod: this.ModManifest,
