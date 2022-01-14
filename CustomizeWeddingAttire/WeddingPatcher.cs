@@ -56,7 +56,7 @@ namespace CustomizeWeddingAttire
                 return true;
             }
             // Put the player in a tux if desired
-            if (Config.WeddingAttire == I18n.Get("weddingAttire.tuxOption"))
+            if (Config.WeddingAttire == "weddingAttire.tuxOption")
             {
                 ___oldShirt = __instance.farmer.shirt;
                 __instance.farmer.changeShirt(10);
@@ -69,7 +69,7 @@ namespace CustomizeWeddingAttire
             // TODO fix this area to do the right thing based on other player's preferences
             // Defaulting to no change if they don't have this mod
             // Put the other players in tuxes if desired
-            if (Config.OtherPlayersWeddingAttire == I18n.Get("weddingAttire.tuxOption"))
+            if (Config.OtherPlayersWeddingAttire == "weddingAttire.tuxOption")
             {
                 foreach (Farmer farmerActor in __instance.farmerActors)
                 {
