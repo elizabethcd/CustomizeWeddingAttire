@@ -17,10 +17,10 @@ namespace CustomizeWeddingAttire
         private ITranslationHelper I18n;
 
         // Config option strings defined here as constants for use elsewhere
-        public static const tuxOption = "weddingAttire.tuxOption";
-        public static const dressOption = "weddingAttire.dressOption";
-        public static const noneOption = "weddingAttire.noneOption";
-        public static const defaultOption = "weddingAttire.defaultOption";
+        public const string tuxOption = "weddingAttire.tuxOption";
+        public const string dressOption = "weddingAttire.dressOption";
+        public const string noneOption = "weddingAttire.noneOption";
+        public const string defaultOption = "weddingAttire.defaultOption";
 
         // TODO investigate Fashion Sense compatibility
         // TODO make sure translations work in GMCM
@@ -71,10 +71,10 @@ namespace CustomizeWeddingAttire
                 getValue: () => this.Config.WeddingAttire,
                 setValue: value => this.Config.WeddingAttire = value,
                 allowedValues: new string[] {
-                    "weddingAttire.tuxOption",
-                    "weddingAttire.dressOption",
-                    "weddingAttire.noneOption",
-                    "weddingAttire.defaultOption"
+                    tuxOption,
+                    dressOption,
+                    noneOption,
+                    defaultOption
                 },
                 formatAllowedValue: (str) => this.Helper.Translation.Get(str)
             );

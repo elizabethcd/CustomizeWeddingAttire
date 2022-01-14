@@ -10,7 +10,7 @@ namespace CustomizeWeddingAttire
         public ModConfig()
         {
             // By default, make no changes
-            this.WeddingAttire = "weddingAttire.noneOption";
+            this.WeddingAttire = ModEntry.noneOption;
         }
     }
 }

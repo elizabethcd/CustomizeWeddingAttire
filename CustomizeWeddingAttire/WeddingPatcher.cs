@@ -53,7 +53,7 @@ namespace CustomizeWeddingAttire
             // Put the player in a tux if desired
             try
             {
-                if (Config.WeddingAttire == "weddingAttire.tuxOption")
+                if (Config.WeddingAttire == ModEntry.tuxOption)
                 {
                     ___oldShirt = __instance.farmer.shirt;
                     __instance.farmer.changeShirt(10);
@@ -70,7 +70,7 @@ namespace CustomizeWeddingAttire
             // Put the player in a dress if desired
             try
             {
-                if (Config.WeddingAttire == "weddingAttire.dressOption")
+                if (Config.WeddingAttire == ModEntry.dressOption)
                 {
                     // TODO figure out what to put them in
                 }
@@ -99,19 +99,26 @@ namespace CustomizeWeddingAttire
                             farmerActor.changePantStyle(0);
                         }
                     }
-                    // If a preference has been successfully recorded
-                    else
-                    {
-                        if (farmerPreference == "weddingAttire.tuxOption")
+                    // Use the game default if preferred
+                    else if (farmerPreference == ModEntry.defaultOption) {
+                        if (farmerActor.isMale)
                         {
                             farmerActor.changeShirt(10);
                             farmerActor.changePants(new Color(49, 49, 49));
                             farmerActor.changePantStyle(0);
                         }
-                        if (farmerPreference == "weddingAttire.dressOption")
-                        {
-                            // TODO figure out what the dress option should look like
-                        }
+                    }
+                    // Tuxedo if preferred
+                    else if(farmerPreference == ModEntry.tuxOption)                        
+                    {
+                        farmerActor.changeShirt(10);
+                        farmerActor.changePants(new Color(49, 49, 49));
+                        farmerActor.changePantStyle(0);
+                    }
+                    // Dress if preferred
+                    else if (farmerPreference == ModEntry.dressOption)
+                    {
+                        // TODO figure out what the dress option should look like
                     }
                 }
             }
