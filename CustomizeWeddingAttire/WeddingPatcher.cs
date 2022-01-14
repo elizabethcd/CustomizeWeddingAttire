@@ -12,13 +12,15 @@ namespace CustomizeWeddingAttire
         private static IMonitor Monitor;
         private static ModConfig Config;
         private static ITranslationHelper I18n;
+        private static IManifest Manifest;
 
         // call this method from your Entry class
-        public static void Initialize(IMonitor monitor, ModConfig config, ITranslationHelper translator)
+        public static void Initialize(IMonitor monitor, ModConfig config, ITranslationHelper translator, IManifest manifest)
         {
             Monitor = monitor;
             Config = config;
             I18n = translator;
+            Manifest = manifest;
         }
 
         // Method to apply harmony patch
@@ -49,49 +51,90 @@ namespace CustomizeWeddingAttire
             }
 
             // Put the player in a tux if desired
-            if (Config.WeddingAttire == "weddingAttire.tuxOption")
+            try
             {
-                ___oldShirt = __instance.farmer.shirt;
-                __instance.farmer.changeShirt(10);
-                ___oldPants = __instance.farmer.pantsColor;
-                __instance.farmer.changePantStyle(0);
-                __instance.farmer.changePants(new Color(49, 49, 49));
-            }
-            // Put the player in a dress if desired (TBD, need to find indices for shirt/pants)
-
-            // TODO fix this area to do the right thing based on other player's preferences
-            // Defaulting to game default if they don't have this mod
-            foreach (Farmer farmerActor in __instance.farmerActors)
-            {
-                // TODO check their preferences using
-                // Check for no change in clothing:
-                // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.noneOption");
-
-                // Check for tux behavior
-                // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.tuxOption");
-                farmerActor.changeShirt(10);
-                farmerActor.changePants(new Color(49, 49, 49));
-                farmerActor.changePantStyle(0);
-
-                // Check for dress behavior
-                // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.dressOption");
-
-                // If all else fails, use default behavior
-                if (farmerActor.isMale)
+                if (Config.WeddingAttire == "weddingAttire.tuxOption")
                 {
-                    farmerActor.changeShirt(10);
-                    farmerActor.changePants(new Color(49, 49, 49));
-                    farmerActor.changePantStyle(0);
+                    ___oldShirt = __instance.farmer.shirt;
+                    __instance.farmer.changeShirt(10);
+                    ___oldPants = __instance.farmer.pantsColor;
+                    __instance.farmer.changePantStyle(0);
+                    __instance.farmer.changePants(new Color(49, 49, 49));
                 }
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed to make player wear tux with exception: {ex}", LogLevel.Error);
+            }
+
+            // Put the player in a dress if desired
+            try
+            {
+                if (Config.WeddingAttire == "weddingAttire.dressOption")
+                {
+                    // TODO figure out what to put them in
+                }
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed to make player wear dress with exception: {ex}", LogLevel.Error);
+            }
+
+            // Figure out what behavior to take for each other farmer
+            try
+            {
+                foreach (Farmer farmerActor in __instance.farmerActors)
+                {
+                    long unqID = farmerActor.UniqueMultiplayerID;
+                    Farmer realFarmerActor = Game1.getFarmerMaybeOffline(unqID);
+
+                    // Check for the preference of the farmer in modData
+                    if (!realFarmerActor.modData.TryGetValue($"{Manifest.UniqueID}/weddingAttirePref", out string farmerPreference))
+                    {
+                        // If no preference is recorded, use the game default
+                        if (farmerActor.isMale)
+                        {
+                            farmerActor.changeShirt(10);
+                            farmerActor.changePants(new Color(49, 49, 49));
+                            farmerActor.changePantStyle(0);
+                        }
+                    }
+                    // If a preference has been successfully recorded
+                    else
+                    {
+                        if (farmerPreference == "weddingAttire.tuxOption")
+                        {
+                            farmerActor.changeShirt(10);
+                            farmerActor.changePants(new Color(49, 49, 49));
+                            farmerActor.changePantStyle(0);
+                        }
+                        if (farmerPreference == "weddingAttire.dressOption")
+                        {
+                            // TODO figure out what the dress option should look like
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed to change other player's sprite's clothes with exception: {ex}", LogLevel.Error);
             }
 
             // Do the sprite adding that needs to be done if the function is skipped
-            location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(540, 1196, 98, 54), 99999f, 1, 99999, new Vector2(25f, 60f) * 64f + new Vector2(0f, -64f), flicker: false, flipped: false, 1f, 0f, Color.White, 4f, 0f, 0f, 0f));
-            location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(540, 1250, 98, 25), 99999f, 1, 99999, new Vector2(25f, 60f) * 64f + new Vector2(0f, 54f) * 4f + new Vector2(0f, -64f), flicker: false, flipped: false, 0f, 0f, Color.White, 4f, 0f, 0f, 0f));
-            location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(24f, 62f) * 64f, flicker: false, flipped: false, 0f, 0f, Color.White, 4f, 0f, 0f, 0f));
-            location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(32f, 62f) * 64f, flicker: false, flipped: false, 0f, 0f, Color.White, 4f, 0f, 0f, 0f));
-            location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(24f, 69f) * 64f, flicker: false, flipped: false, 1f, 0f, Color.White, 4f, 0f, 0f, 0f));
-            location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(32f, 69f) * 64f, flicker: false, flipped: false, 1f, 0f, Color.White, 4f, 0f, 0f, 0f));
+            try
+            {
+                location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(540, 1196, 98, 54), 99999f, 1, 99999, new Vector2(25f, 60f) * 64f + new Vector2(0f, -64f), flicker: false, flipped: false, 1f, 0f, Color.White, 4f, 0f, 0f, 0f));
+                location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(540, 1250, 98, 25), 99999f, 1, 99999, new Vector2(25f, 60f) * 64f + new Vector2(0f, 54f) * 4f + new Vector2(0f, -64f), flicker: false, flipped: false, 0f, 0f, Color.White, 4f, 0f, 0f, 0f));
+                location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(24f, 62f) * 64f, flicker: false, flipped: false, 0f, 0f, Color.White, 4f, 0f, 0f, 0f));
+                location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(32f, 62f) * 64f, flicker: false, flipped: false, 0f, 0f, Color.White, 4f, 0f, 0f, 0f));
+                location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(24f, 69f) * 64f, flicker: false, flipped: false, 1f, 0f, Color.White, 4f, 0f, 0f, 0f));
+                location.TemporarySprites.Add(new TemporaryAnimatedSprite("LooseSprites\\Cursors", new Microsoft.Xna.Framework.Rectangle(527, 1249, 12, 25), 99999f, 1, 99999, new Vector2(32f, 69f) * 64f, flicker: false, flipped: false, 1f, 0f, Color.White, 4f, 0f, 0f, 0f));
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed to finish wedding scene setup with exception: {ex}", LogLevel.Error);
+            }
+            
             return false;
         }
     }

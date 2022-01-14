@@ -32,8 +32,8 @@ namespace CustomizeWeddingAttire
             // Initialize the i18n helper
             this.I18n = this.Helper.Translation;
 
-            // Initialize the error logger in FurniturePatcher
-            WeddingPatcher.Initialize(this.Monitor, this.Config, this.I18n);
+            // Initialize useful things from this class in WeddingPatcher
+            WeddingPatcher.Initialize(this.Monitor, this.Config, this.I18n, this.ModManifest);
 
             // Apply the Harmony patches
             var harmony = new Harmony(this.ModManifest.UniqueID);
@@ -54,7 +54,8 @@ namespace CustomizeWeddingAttire
                 reset: () => Config = new ModConfig(),
                 save: () => {
                     Helper.WriteConfig(Config);
-                    // TODO add Game1.player.modData[$"{this.ModManifest.UniqueID}/weddingAttirePref"] = this.Config.weddingAttire;
+                    // Refresh the modData recording wedding attire preferences for this player
+                    Game1.player.modData[$"{this.ModManifest.UniqueID}/weddingAttirePref"] = this.Config.WeddingAttire;
                 }
             );
             configMenu.AddTextOption(
