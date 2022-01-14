@@ -24,6 +24,6 @@ In a multiplayer game, if one of the players wants to wear a different option fr
 * Enjoy!
 
 # Credits
-ManInBlack, atravita, and Tlitookilakin for tons of help with the learnings.
-spacechase0 for making GMCM.
-CopperSun for complaining about this issue in SDV, and ZoeDoll for making ``Ridgeside Rival Hearts - Jeric and Alex`` which notes this issue.
+* ManInBlack, atravita, and Tlitookilakin for tons of help with the learnings.
+* spacechase0 for making GMCM and Pathoschild for making SMAPI.
+* CopperSun for complaining about this issue in SDV, and ZoeDoll for making ``Ridgeside Rival Hearts - Jeric and Alex`` which notes this issue.
