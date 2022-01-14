@@ -66,7 +66,8 @@ namespace CustomizeWeddingAttire
                 allowedValues: new string[] {
                     "weddingAttire.tuxOption",
                     "weddingAttire.dressOption",
-                    "weddingAttire.noneOption"
+                    "weddingAttire.noneOption",
+                    "weddingAttire.defaultOption"
                 },
                 formatAllowedValue: (str) => this.Helper.Translation.Get(str)
             );

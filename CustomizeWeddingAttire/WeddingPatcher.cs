@@ -57,22 +57,32 @@ namespace CustomizeWeddingAttire
                 __instance.farmer.changePantStyle(0);
                 __instance.farmer.changePants(new Color(49, 49, 49));
             }
-            // Put the player in a dress if desired (TBD, need to find indices)
+            // Put the player in a dress if desired (TBD, need to find indices for shirt/pants)
 
             // TODO fix this area to do the right thing based on other player's preferences
-            // Defaulting to no change if they don't have this mod
+            // Defaulting to game default if they don't have this mod
             foreach (Farmer farmerActor in __instance.farmerActors)
             {
                 // TODO check their preferences using
                 // Check for no change in clothing:
                 // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.noneOption");
+
                 // Check for tux behavior
                 // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.tuxOption");
                 farmerActor.changeShirt(10);
                 farmerActor.changePants(new Color(49, 49, 49));
                 farmerActor.changePantStyle(0);
+
                 // Check for dress behavior
                 // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.dressOption");
+
+                // If all else fails, use default behavior
+                if (farmerActor.isMale)
+                {
+                    farmerActor.changeShirt(10);
+                    farmerActor.changePants(new Color(49, 49, 49));
+                    farmerActor.changePantStyle(0);
+                }
             }
 
             // Do the sprite adding that needs to be done if the function is skipped
