@@ -35,7 +35,18 @@ namespace CustomizeWeddingAttire
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed to add prefix to wedding sprite function with exception: {ex}", LogLevel.Error);
+                Monitor.Log($"Failed to add prefix to before wedding sprite function with exception: {ex}", LogLevel.Error);
+            }
+            try
+            {
+                harmony.Patch(
+                    original: AccessTools.Method(typeof(Event),nameof(Event.endBehaviors)),
+                    postfix: new HarmonyMethod(typeof(WeddingPatcher), nameof(WeddingPatcher.Event_endBehaviors_Postfix))
+                );
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed to add postfix to after wedding sprite function with exception: {ex}", LogLevel.Error);
             }
         }
 
@@ -72,7 +83,11 @@ namespace CustomizeWeddingAttire
             {
                 if (Config.WeddingAttire == ModEntry.dressOption)
                 {
-                    // TODO figure out what to put them in
+                    ___oldShirt = __instance.farmer.shirt;
+                    __instance.farmer.changeShirt(265);
+                    ___oldPants = __instance.farmer.pantsColor;
+                    __instance.farmer.changePantStyle(2);
+                    __instance.farmer.changePants(new Color(255, 255, 255));
                 }
             }
             catch (Exception ex)
@@ -144,6 +159,41 @@ namespace CustomizeWeddingAttire
             
             return false;
         }
+        private static void Event_endBehaviors_Postfix(string[] split, Event __instance, ref int ___oldShirt, ref Color ___oldPants)
+        {
+            try
+            {
+                if (split != null && split.Length > 1)
+                {
+                    string key = split[1];
+                    if (key != "wedding")
+                    {
+                        return;
+                    }
+                    try
+                    {
+                        if (Config.WeddingAttire == ModEntry.dressOption || Config.WeddingAttire == ModEntry.tuxOption)
+                        {
+                            __instance.farmer.changeShirt(-1);
+                            __instance.farmer.changePants(___oldPants);
+                            __instance.farmer.changePantStyle(-1);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Monitor.Log($"Failed to reset clothes after wedding with exception: {ex}", LogLevel.Error);
+                    }
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed to initiate resetting clothes after wedding with exception: {ex}", LogLevel.Error);
+            }
+
+        }
+
+        
     }
 
 }
