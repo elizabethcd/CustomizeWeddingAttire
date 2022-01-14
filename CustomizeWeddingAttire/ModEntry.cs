@@ -64,21 +64,6 @@ namespace CustomizeWeddingAttire
                 getValue: () => this.Config.WeddingAttire,
                 setValue: value => this.Config.WeddingAttire = value,
                 allowedValues: new string[] {
-                    "weddingAttire.defaultOption",
-                    "weddingAttire.tuxOption",
-                    "weddingAttire.dressOption",
-                    "weddingAttire.noneOption"
-                },
-                formatAllowedValue: (str) => this.Helper.Translation.Get(str)
-            );
-            configMenu.AddTextOption(
-                mod: this.ModManifest,
-                name: () => this.Helper.Translation.Get("otherWeddingAttire.title"),
-                tooltip: ()=> this.Helper.Translation.Get("otherWeddingAttire.description"),
-                getValue: () => this.Config.WeddingAttire,
-                setValue: value => this.Config.WeddingAttire = value,
-                allowedValues: new string[] {
-                    "weddingAttire.defaultOption",
                     "weddingAttire.tuxOption",
                     "weddingAttire.dressOption",
                     "weddingAttire.noneOption"
