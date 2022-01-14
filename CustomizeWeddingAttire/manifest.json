@@ -1,0 +1,9 @@
+﻿{
+  "Name": "Customize Wedding Attire",
+  "Author": "violetlizabet",
+  "Version": "1.0.0",
+  "Description": "Adds options for what to wear at a wedding.",
+  "UniqueID": "violetlizabet.CustomizeWeddingAttire",
+  "EntryDll": "CustomizeWeddingAttire.dll",
+  "UpdateKeys": [ ]
+}

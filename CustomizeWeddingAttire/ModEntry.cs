@@ -64,6 +64,10 @@ namespace CustomizeWeddingAttire
                     Game1.player.modData[$"{this.ModManifest.UniqueID}/weddingAttirePref"] = this.Config.WeddingAttire;
                 }
             );
+            configMenu.AddParagraph(
+                mod: ModManifest,
+                text: () => Helper.Translation.Get("mod.description")
+                );
             configMenu.AddTextOption(
                 mod: this.ModManifest,
                 name: () => this.Helper.Translation.Get("weddingAttire.title"),
