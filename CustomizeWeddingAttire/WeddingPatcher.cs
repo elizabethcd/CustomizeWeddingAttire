@@ -40,21 +40,14 @@ namespace CustomizeWeddingAttire
         // Method that is used to prefix
         private static bool Event_addSpecificTemporarySprite_Prefix(string key, GameLocation location, Event __instance, ref int ___oldShirt, ref Color ___oldPants)
         {
-            // don't do this, instead:
-            // Use some kind of data structure to store player preferences
-            // Read each farmer's preference in, along with their unique multiplayer ID
-            // For each farmer in the game, set their clothing according to their preferences
+            // TODO add try/catch statements everywhere
 
             // If this is not a temporary sprite for a wedding, skip this prefix entirely
             if (key != "wedding")
             {
                 return true;
             }
-            // If no changes are desired, skip this prefix entirely
-            if (Config.WeddingAttire == "Default" && Config.OtherPlayersWeddingAttire == "Default")
-            {
-                return true;
-            }
+
             // Put the player in a tux if desired
             if (Config.WeddingAttire == "weddingAttire.tuxOption")
             {
@@ -64,19 +57,22 @@ namespace CustomizeWeddingAttire
                 __instance.farmer.changePantStyle(0);
                 __instance.farmer.changePants(new Color(49, 49, 49));
             }
-            // Put the player in a dress if desired (TBD)
+            // Put the player in a dress if desired (TBD, need to find indices)
 
             // TODO fix this area to do the right thing based on other player's preferences
             // Defaulting to no change if they don't have this mod
-            // Put the other players in tuxes if desired
-            if (Config.OtherPlayersWeddingAttire == "weddingAttire.tuxOption")
+            foreach (Farmer farmerActor in __instance.farmerActors)
             {
-                foreach (Farmer farmerActor in __instance.farmerActors)
-                {
-                    farmerActor.changeShirt(10);
-                    farmerActor.changePants(new Color(49, 49, 49));
-                    farmerActor.changePantStyle(0);
-                }
+                // TODO check their preferences using
+                // Check for no change in clothing:
+                // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.noneOption");
+                // Check for tux behavior
+                // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.tuxOption");
+                farmerActor.changeShirt(10);
+                farmerActor.changePants(new Color(49, 49, 49));
+                farmerActor.changePantStyle(0);
+                // Check for dress behavior
+                // farmerActor.modData.tryGetData($"{this.ModManifest.UniqueID}/weddingAttirePref", "weddingAttire.dressOption");
             }
 
             // Do the sprite adding that needs to be done if the function is skipped

@@ -11,8 +11,8 @@ namespace CustomizeWeddingAttire
         public ModConfig()
         {
             // By default, make no changes
-            this.WeddingAttire = "weddingAttire.defaultOption";
-            this.OtherPlayersWeddingAttire = "weddingAttire.defaultOption";
+            this.WeddingAttire = "weddingAttire.noneOption";
+            this.OtherPlayersWeddingAttire = "weddingAttire.noneOption";
         }
     }
 }

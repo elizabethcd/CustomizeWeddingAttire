@@ -52,8 +52,11 @@ namespace CustomizeWeddingAttire
             configMenu.Register(
                 mod: ModManifest,
                 reset: () => Config = new ModConfig(),
-                save: () => Helper.WriteConfig(Config) // TODO add "send out message with prefs here"
-                );
+                save: () => {
+                    Helper.WriteConfig(Config);
+                    // TODO add Game1.player.modData[$"{this.ModManifest.UniqueID}/weddingAttirePref"] = this.Config.weddingAttire;
+                }
+            );
             configMenu.AddTextOption(
                 mod: this.ModManifest,
                 name: () => this.Helper.Translation.Get("weddingAttire.title"),
