@@ -40,6 +40,16 @@ namespace CustomizeWeddingAttire
         // Method that is used to prefix
         private static bool Event_addSpecificTemporarySprite_Prefix(string key, GameLocation location, Event __instance, ref int ___oldShirt, ref Color ___oldPants)
         {
+            // don't do this, instead:
+            // Use some kind of data structure to store player preferences
+            // Read each farmer's preference in, along with their unique multiplayer ID
+            // For each farmer in the game, set their clothing according to their preferences
+
+            // If this is not a temporary sprite for a wedding, skip this prefix entirely
+            if (key != "wedding")
+            {
+                return true;
+            }
             // If no changes are desired, skip this prefix entirely
             if (Config.WeddingAttire == "Default" && Config.OtherPlayersWeddingAttire == "Default")
             {
@@ -54,6 +64,10 @@ namespace CustomizeWeddingAttire
                 __instance.farmer.changePantStyle(0);
                 __instance.farmer.changePants(new Color(49, 49, 49));
             }
+            // Put the player in a dress if desired (TBD)
+
+            // TODO fix this area to do the right thing based on other player's preferences
+            // Defaulting to no change if they don't have this mod
             // Put the other players in tuxes if desired
             if (Config.OtherPlayersWeddingAttire == I18n.Get("weddingAttire.tuxOption"))
             {

@@ -52,7 +52,7 @@ namespace CustomizeWeddingAttire
             configMenu.Register(
                 mod: ModManifest,
                 reset: () => Config = new ModConfig(),
-                save: () => Helper.WriteConfig(Config) // add "send out message with prefs here"
+                save: () => Helper.WriteConfig(Config) // TODO add "send out message with prefs here"
                 );
             configMenu.AddTextOption(
                 mod: this.ModManifest,
