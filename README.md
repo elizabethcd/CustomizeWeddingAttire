@@ -23,7 +23,15 @@ In a multiplayer game, if one of the players wants to wear a different option fr
 * Run the game once to create config.json if you're not using GMCM
 * Enjoy!
 
+# Compatibility
+* This mod is compatible with multiplayer.
+* This mod should be compatible with any mods that do not edit clothing. 
+* If you are wearing Fashion Sense clothing when you attend a wedding, Fashion Sense overrides this mod exactly the same way as vanilla clothing. For example, if you're wearing a FS skirt and a vanilla top and get married with the ``Tuxedo`` config option selected, you will wear a tuxedo top and the FS skirt. 
+* Get Glam has not been tested with this mod because it's very buggy. 
+* Json Assets clothing should work the same as vanilla clothing, but this has not been tested.
+* If you have a CP mod that edits the tuxedo outfit or the wedding dress outfit, you will most likely see them edited during the wedding. 
+
 # Credits
-* ManInBlack, atravita, and Tlitookilakin for tons of help with the learnings.
+* ManInBlack, atravita, and Tlitookilakin for tons of help with the C# learning.
 * spacechase0 for making GMCM and Pathoschild for making SMAPI.
 * CopperSun for complaining about this issue in SDV, and ZoeDoll for making ``Ridgeside Rival Hearts - Jeric and Alex`` which notes this issue.
