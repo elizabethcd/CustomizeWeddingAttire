@@ -5,5 +5,5 @@
   "Description": "Adds options for what to wear at a wedding.",
   "UniqueID": "violetlizabet.CustomizeWeddingAttire",
   "EntryDll": "CustomizeWeddingAttire.dll",
-  "UpdateKeys": [ ]
+  "UpdateKeys": [ "Nexus:10761" ]
 }
