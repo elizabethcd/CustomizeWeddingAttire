@@ -32,6 +32,7 @@ In a multiplayer game, if one of the players wants to wear a different option fr
 * If you have a CP mod that edits the tuxedo outfit or the wedding dress outfit, you will most likely see them edited during the wedding. 
 
 # Credits
+* Misha for helping me test.
 * ManInBlack, atravita, and Tlitookilakin for tons of help with the C# learning.
 * spacechase0 for making GMCM and Pathoschild for making SMAPI.
 * CopperSun for complaining about this issue in SDV, and ZoeDoll for making ``Ridgeside Rival Hearts - Jeric and Alex`` which notes this issue.
