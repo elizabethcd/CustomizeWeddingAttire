@@ -8,7 +8,7 @@ Normally, in Stardew Valley, when there is a wedding:
 
 This mod changes this, so that when there is a wedding:
 * If you select the ``Tuxedo`` option in the config, you are put into a tuxedo outfit.
-* If you select the ``WeddingDress`` option in the config, you are put into a wedding dress outfit.
+* If you select the ``WeddingDress`` option in the config, you are put into a wedding dress outfit. (Note that this is what you will wear to any wedding, not just your own!)
 * If you select the ``NoClothingChange`` option in the config, your clothing is whatever you were wearing right before the wedding.
 * If you select the ``GameDefault`` option in the config, your clothing decisions follow the default game logic.
 
