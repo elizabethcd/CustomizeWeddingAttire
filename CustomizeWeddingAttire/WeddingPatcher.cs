@@ -133,7 +133,9 @@ namespace CustomizeWeddingAttire
                     // Dress if preferred
                     else if (farmerPreference == ModEntry.dressOption)
                     {
-                        // TODO figure out what the dress option should look like
+                        farmerActor.changeShirt(265);
+                        farmerActor.changePantStyle(2);
+                        farmerActor.changePants(new Color(255, 255, 255));
                     }
                 }
             }

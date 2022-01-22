@@ -22,9 +22,6 @@ namespace CustomizeWeddingAttire
         public const string noneOption = "weddingAttire.noneOption";
         public const string defaultOption = "weddingAttire.defaultOption";
 
-        // TODO investigate Fashion Sense compatibility
-        // TODO make sure translations work in GMCM
-
         /*********
         ** Public methods
         *********/
