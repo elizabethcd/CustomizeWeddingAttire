@@ -65,20 +65,67 @@ namespace CustomizeWeddingAttire
                 mod: ModManifest,
                 text: () => Helper.Translation.Get("mod.description")
                 );
-            configMenu.AddTextOption(
-                mod: this.ModManifest,
-                name: () => this.Helper.Translation.Get("weddingAttire.title"),
-                tooltip: () => this.Helper.Translation.Get("weddingAttire.description"),
-                getValue: () => this.Config.WeddingAttire,
-                setValue: value => this.Config.WeddingAttire = value,
-                allowedValues: new string[] {
+            var configMenuExt = Helper.ModRegistry.GetApi<IGMCMOptionsAPI>("jltaylor-us.GMCMOptions");
+            if (configMenuExt is null) {
+                configMenu.AddTextOption(
+                    mod: this.ModManifest,
+                    name: () => this.Helper.Translation.Get("weddingAttire.title"),
+                    tooltip: () => this.Helper.Translation.Get("weddingAttire.description"),
+                    getValue: () => this.Config.WeddingAttire,
+                    setValue: value => this.Config.WeddingAttire = value,
+                    allowedValues: new string[] {
                     tuxOption,
                     dressOption,
                     noneOption,
                     defaultOption
-                },
-                formatAllowedValue: (str) => this.Helper.Translation.Get(str)
-            );
+                    },
+                    formatAllowedValue: (str) => this.Helper.Translation.Get(str)
+                );
+            } else {
+                var values = new string[] {
+                    tuxOption,
+                    dressOption,
+                    noneOption,
+                    defaultOption
+                    };
+                configMenuExt.AddImageOption(
+                    mod: this.ModManifest,
+                    name: () => this.Helper.Translation.Get("weddingAttire.title"),
+                    tooltip: () => this.Helper.Translation.Get("weddingAttire.description"),
+                    getValue: () => (uint)Array.IndexOf(values, this.Config.WeddingAttire),
+                    setValue: (idx) => this.Config.WeddingAttire = values[idx],
+                    getMaxValue: () => (uint)values.Length - 1,
+                    maxImageHeight: () => 128,
+                    maxImageWidth: () => 64,
+                    drawImage: (v, b, pos) => {
+                        FarmerRenderer.isDrawingForUI = true;
+                        var farmer = Game1.player;
+                        var oldPantsColor = farmer.pantsColor.Value;
+                        var oldDir = farmer.facingDirection.Value;
+                        farmer.faceDirection(Game1.down);
+                        if (v == 0 || v == 3 && farmer.IsMale) { // tux
+                            farmer.changeShirt(10);
+                            farmer.changePantStyle(0);
+                            farmer.changePants(new Color(49, 49, 49));
+
+                        } else if (v == 1) { // dress
+                            farmer.changeShirt(265);
+                            farmer.changePantStyle(2);
+                            farmer.changePants(new Color(255, 255, 255));
+                        }
+                        farmer.FarmerRenderer.draw(b, farmer.FarmerSprite.CurrentAnimationFrame, farmer.FarmerSprite.CurrentFrame, farmer.FarmerSprite.SourceRect, pos, Vector2.Zero, 0.8f, Color.White, 0f, 1f, farmer);
+                        farmer.changeShirt(-1);
+                        farmer.changePants(oldPantsColor);
+                        farmer.changePantStyle(-1);
+                        farmer.faceDirection(oldDir);
+                        FarmerRenderer.isDrawingForUI = false;
+                    },
+                    label: (idx) => this.Helper.Translation.Get(values[idx]),
+                    arrowLocation: (int)IGMCMOptionsAPI.ImageOptionArrowLocation.Sides,
+                    labelLocation: (int)IGMCMOptionsAPI.ImageOptionLabelLocation.Top
+                );
+
+            }
         }
     }
 }
