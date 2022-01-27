@@ -1,5 +1,8 @@
 # Release Notes
 
+## Upcoming Release
+- Add live preview image to the configuration page if GMCM Options is installed
+
 ## v1.0.0
 - First full release
 - Compatible with Stardew Valley 1.5.5+

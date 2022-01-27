@@ -15,11 +15,12 @@ This mod changes this, so that when there is a wedding:
 In a multiplayer game, if one of the players wants to wear a different option from the default, the other players will also need to have this mod in order to see them wear the right clothing.
 
 # How To Install
-* Install SMAPI, if you don't already have it installed
+* Install [SMAPI](https://smapi.io), if you don't already have it installed
 * Download this mod
 * Unzip
 * Move into your mods folder
-* Optionally, install Generic Mod Config Menu (GMCM) as well for easy configuration
+* Optionally, install [Generic Mod Config Menu (GMCM)](https://www.nexusmods.com/stardewvalley/mods/5098) as well for easy configuration
+** If [GMCM Options](https://www.nexusmods.com/stardewvalley/mods/10505) is also installed then the configuration will show a live preview image
 * Run the game once to create config.json if you're not using GMCM
 * Enjoy!
 
