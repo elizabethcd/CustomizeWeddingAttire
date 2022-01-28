@@ -1,7 +1,7 @@
 # Release Notes
 
-## Upcoming Release
-- Add live preview image to the configuration page if GMCM Options is installed
+## v1.0.1
+- Add live preview image to the configuration page if GMCM Options is installed (best viewed inside a save instead of from title)
 
 ## v1.0.0
 - First full release
