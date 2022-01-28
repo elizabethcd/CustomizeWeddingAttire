@@ -20,7 +20,7 @@ In a multiplayer game, if one of the players wants to wear a different option fr
 * Unzip
 * Move into your mods folder
 * Optionally, install [Generic Mod Config Menu (GMCM)](https://www.nexusmods.com/stardewvalley/mods/5098) as well for easy configuration
-** If [GMCM Options](https://www.nexusmods.com/stardewvalley/mods/10505) is also installed then the configuration will show a live preview image
+  * If [GMCM Options](https://www.nexusmods.com/stardewvalley/mods/10505) is also installed then the configuration will show a live preview image
 * Run the game once to create config.json if you're not using GMCM
 * Enjoy!
 
