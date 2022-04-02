@@ -72,7 +72,7 @@ The singleplayer cases should be rerun with:
 * GMCM but not GMCM Options installed
 * Neither GMCM nor GMCM Options installed
 
-For completeness, all singleplayer cases should be rerun, but since this is a bit tedious due to the need for repeated reloading, at the minimum one case that produces a visible change from vanilla should be tested for both possible player genders. 
+For completeness, all singleplayer cases should be rerun, but since this is a bit tedious due to the need for repeated reloading, at the minimum one case that produces a visible change from vanilla should be tested for both possible player genders. In addition, this testing is skipped for multiplayer due to the extreme tedium of repeatedly reloading in multiplayer, but in theory would be tested for full completeness. 
 
 ## Technicalities
 
